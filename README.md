@@ -20,5 +20,13 @@ npm run check    # 타입 검사
 
 ## 로드맵
 - [x] MVP: 잠금·암호화, 하루 기록, 같은 날 다른 해 보기, 연도 띠, 검색·태그, 음력 표시, 백업/복원, 텍스트 가져오기, Markdown 내보내기
+- [x] 테스트 빌드: 윈도우 단일 HTML 파일, 안드로이드 APK (Capacitor)
 - [ ] Google Drive(appDataFolder) 암호화 자동 동기화
 - [ ] 사진 첨부, 매일 알림, 연도별 통계
+
+## 테스트 빌드
+```
+npm run build:single          # dist-single/index.html: 더블클릭으로 여는 윈도우용 단일 파일
+npm run build && npx cap sync android && (cd android && ./gradlew assembleDebug)   # 안드로이드 APK
+```
+GitHub에 push하면 Actions가 두 파일을 자동으로 빌드해서 Artifacts로 올립니다.

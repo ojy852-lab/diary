@@ -1,0 +1,42 @@
+name: Build test apps
+
+# Builds the Android APK and the Windows single-file HTML on every push to main.
+# Download both from the run's "Artifacts" section on the Actions tab.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: npm run build:single
+      - run: npx cap sync android
+      - name: Build debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+      - run: |
+          mkdir -p out
+          cp android/app/build/outputs/apk/debug/app-debug.apk out/mannyeon-diary.apk
+          cp dist-single/index.html out/mannyeon-diary-windows.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mannyeon-diary
+          path: out/
+          retention-days: 30
