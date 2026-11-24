@@ -1,0 +1,16 @@
+{
+  "name": "만년 다이어리",
+  "short_name": "만년다이어리",
+  "description": "같은 날의 지난 해들을 함께 보는 개인용 암호화 다이어리",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f1e7",
+  "theme_color": "#8a5a2b",
+  "lang": "ko",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
